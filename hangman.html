@@ -1,111 +1,64 @@
 <!DOCTYPE html>
-
-<html> 
-
-<head> 
-
-<title>80's Movie Hangman</title>
-
+<html>
+<head>
+  <title>80's Movie Hangman</title>
 </head>
-
 <body>
 
-<div id="hangman">
-	<p></p>
-</div>
+  <div id="hangman">
+    <p></p>
+  </div>
+
+  <script type="text/javascript">
+
+  //elements of hangman game
+  var chances = 10;
+  var words = ['goonies', 'pretty in pink', 'breakfast club', 'ferris bueller', 'about last night', 'better off dead'];
+  //capture each guess in an array to display letters already chosen
+  var guesses = [];
+  // I dont think we are using this anywhere else but here
+  //  It's reinstantiated in the event on line 50
+  // var userGuess = [];
 
 
-<script type="text/javascript">
+  //game
+  var correct = 0;
+  var currentWord;
+  var guesses = [];
+  // I've created a variable that you can set or get to check whether
+  // it's a new game or not
+  var newGame = true;
 
 
-//elements of hangman game
+  // I've refactored setting the current word into its own function
+  // It can be invoked using getNewWord();
+  function getNewWord(){
+    // I removed the 'var' you had before this in your onkeyup -- its already
+    //  instantiated on line 24 empty
+    currentWord = words[Math.floor(Math.random() * words.length)];
+  }
 
-var chances = 10; 
+  document.onkeyup = function(event) {
+    // check if it's a new game
+    if(newGame){
+      // if it is get a new word using our new function
+      getNewWord();
+      // set newGame to false so on the next keypress it doesnt
+      // choose another word on next keypress
+      newGame = false
+    }
+    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    guesses.push(userGuess);
+    console.log(userGuess);
+    console.log(currentWord);
+  }
 
-var words = ['goonies', 'pretty in pink', 'breakfast club', 'ferris bueller', 'about last night', 'better off dead'];
-
-//capture each guess in an array to display letters already chosen 
-var guesses = [];
-
-var userGuess = [];
-
-
-
-//game
-
-	var correct = 0;
-
-	var currentWord;
-
-	var guesses = [];
-
-	document.onkeyup = function(event) {
-	
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
-	guesses.push(userGuess)
-	
-	console.log(userGuess);
-
-
-	var currentWord = words[Math.floor(Math.random() * words.length)];
-	console.log(currentWord)
-
-}
-var findOne = function (currentWord, userGuess) {
+  var findOne = function (currentWord, userGuess) {
     return arr.some(function (v) {
         return currentWord.indexOf(v) >= 0;
     });
-};
+  };
 
-
-
-	
-
-
-	//console.log(currentWord)
-
-
-	//for (var i = 0; 0<arrayLength; )
-	
-
-
-	//for (var i = 0; currentWord.length; ++) {
-
-	//	if(userGuess[i]=)
-	//}
-
-
-
-
-	//			if (userGuess(indexof.currentWord)
-  		//	}
-	//		alert("Correct!");
-
-	//	}
-
-	//		 else {
-			
-
-	//		alert("Wrong!")
-	
-//add user guess to array - not sure if this goes here
-	//guesses.push(userGuess)
-//}
-
-//display correct letters - this is not fully written
-
-
-//display letters used 
-
-//set wins and losses 
-
-
-
-
-
-</script>
-
+  </script>
 </body>
-
 </html>
